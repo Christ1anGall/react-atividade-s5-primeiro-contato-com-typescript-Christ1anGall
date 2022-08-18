@@ -1,42 +1,46 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import "./App.css";
 import Card, { User } from "./components/Card/Card";
 import Input from "./components/Input/Input";
 
 function App() {
-  const [name, setName] = useState<string>("");
-  const [age, setAge] = useState<number>(0);
-  const [hobby, setHobby] = useState<string>("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(0);
+  const [hobby, setHobby] = useState("");
 
-  const [users, setUsers] = useState<User[]>([] as User[]);
+  const [users, setUsers] = useState<User[]>([]);
 
-  const setUserrs = (data: any) => {
-    setName(data.target[0].value);
-    setAge(data.target[1].value);
-    setHobby(data.target[2].value);
-  };
-
-  const handleClick = (data: any) => {
-    data.preventDefault();
-
-    setUserrs(data);
-
+  const handleClick = (name: string, age: number, hobby: string) => {
     setUsers((old) => {
       return [...old, { name, age, hobby }];
     });
   };
+
+  useEffect(() => {}, [name, age, hobby]);
+
   return (
     <div className="App">
       <header className="App-header">
         <>
-          <form onSubmit={handleClick}>
-            <Input label="Nome" placeholder="digite seu nome" />
-            <Input label="Age" type="number" placeholder="digite sua idade" />
-            <Input label="Hobby" placeholder="digite seu Hobby" />
-            <button type="submit">Enviar</button>
-          </form>
+          <Input
+            label="Nome"
+            placeholder="digite seu nome"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            label="Age"
+            type="number"
+            placeholder="digite sua idade"
+            onChange={(e) => setAge(parseInt(e.target.value))}
+          />
+          <Input
+            label="Hobby"
+            placeholder="digite seu Hobby"
+            onChange={(e) => setHobby(e.target.value)}
+          />
+          <button onClick={() => handleClick(name, age, hobby)}>Enviar</button>
 
-          {users.map((elem) => {
+          {users?.map((elem) => {
             return (
               <Card
                 key={elem.name}
