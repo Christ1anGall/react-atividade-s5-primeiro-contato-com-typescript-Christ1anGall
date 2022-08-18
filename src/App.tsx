@@ -20,38 +20,36 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <>
-          <Input
-            label="Nome"
-            placeholder="digite seu nome"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            label="Age"
-            type="number"
-            placeholder="digite sua idade"
-            onChange={(e) => setAge(parseInt(e.target.value))}
-          />
-          <Input
-            label="Hobby"
-            placeholder="digite seu Hobby"
-            onChange={(e) => setHobby(e.target.value)}
-          />
-          <button onClick={() => handleClick(name, age, hobby)}>Enviar</button>
+      <>
+        <Input
+          label="Nome"
+          placeholder="digite seu nome"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          label="Age"
+          type="number"
+          placeholder="digite sua idade"
+          onChange={(e) => setAge(parseInt(e.target.value))}
+        />
+        <Input
+          label="Hobby"
+          placeholder="digite seu Hobby"
+          onChange={(e) => setHobby(e.target.value)}
+        />
+        <button onClick={() => handleClick(name, age, hobby)}>Enviar</button>
 
-          {users?.map((elem) => {
-            return (
-              <Card
-                key={elem.name}
-                name={elem.name}
-                age={elem.age}
-                hobby={elem.hobby}
-              />
-            );
-          })}
-        </>
-      </header>
+        {users?.map((elem) => {
+          return (
+            <Card
+              key={elem.name}
+              name={elem.name}
+              age={elem.age}
+              hobby={elem.hobby}
+            />
+          );
+        })}
+      </>
     </div>
   );
 }
